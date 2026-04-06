@@ -1,0 +1,20 @@
+package com.lookjobs.dto;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public class AuthDtos {
+    public record RegisterRequest(
+            @NotBlank String name,
+            @Email @NotBlank String email,
+            @Size(min = 8, message = "Password must be at least 8 chars") String password
+    ) {}
+
+    public record LoginRequest(
+            @Email @NotBlank String email,
+            @NotBlank String password
+    ) {}
+
+    public record AuthResponse(String token, String name, String email) {}
+}
