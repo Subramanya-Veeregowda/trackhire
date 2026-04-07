@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/client";
 import Navbar from "../components/Navbar";
+import { motion } from "framer-motion";
 
 const defaultForm = {
   companyName: "",
@@ -41,10 +42,12 @@ export default function TrackerPage() {
   };
 
   return (
+    <motion.div initial={{ opacity: 90, scale: 0.98 }} animate={{ opacity: 90, scale: 1 }}
+                exit={{ opacity: 90, scale: 0.98 }} transition={{ type: "spring", stiffness: 120, damping: 20, duration: 0.15 }}>
     <>
       <Navbar />
       <main className="max-w-6xl mx-auto p-4 space-y-4">
-        <h1 className="text-2xl font-semibold">Application Tracker</h1>
+        <h1 className="text-2xl font-semibold text-emerald-500 dark:text-emerald-300">Application Tracker</h1>
         <form onSubmit={submit} className="bg-white border rounded-xl p-4 grid md:grid-cols-3 gap-2">
           <input className="border rounded px-3 py-2" placeholder="Company name" value={form.companyName} onChange={(e) => setForm({ ...form, companyName: e.target.value })} required />
           <input className="border rounded px-3 py-2" placeholder="Role" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} required />
@@ -61,10 +64,13 @@ export default function TrackerPage() {
         </form>
 
         <div className="overflow-x-auto bg-white border rounded-xl">
-          <table className="w-full text-sm">
+          <table className="w-full text-sm text-emerald-500 dark:text-emerald-300">
             <thead className="bg-slate-100">
               <tr>
-                <th className="text-left p-2">Company</th><th className="text-left p-2">Role</th><th className="text-left p-2">Status</th><th className="text-left p-2">Actions</th>
+                <th className="text-left p-2 bg-emerald-300/80 dark:bg-emerald-200/80">Company</th>
+                <th className="text-left p-2 bg-emerald-300/80 dark:bg-emerald-200/80">Role</th>
+                <th className="text-left p-2 bg-emerald-300/80 dark:bg-emerald-200/80">Status</th>
+                <th className="text-left p-2 bg-emerald-300/80 dark:bg-emerald-200/80">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -84,5 +90,6 @@ export default function TrackerPage() {
         </div>
       </main>
     </>
+    </motion.div>
   );
 }
