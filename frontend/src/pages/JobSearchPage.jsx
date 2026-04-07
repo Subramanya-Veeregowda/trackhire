@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../api/client";
 import JobCard from "../components/JobCard";
 import Navbar from "../components/Navbar";
+import { motion } from "framer-motion";
 
 export default function JobSearchPage() {
   const [query, setQuery] = useState({ role: "Java Developer", location: "Remote", experience: "0-2 years" });
@@ -37,10 +38,12 @@ export default function JobSearchPage() {
   };
 
   return (
+        <motion.div initial={{ opacity: 90, scale: 0.98 }} animate={{ opacity: 90, scale: 1 }}
+                exit={{ opacity: 90, scale: 0.98 }} transition={{ type: "spring", stiffness: 120, damping: 20, duration: 0.15 }}>
     <>
       <Navbar />
       <main className="max-w-6xl mx-auto p-4 space-y-4">
-        <h1 className="text-2xl font-semibold">Job & Internship Search</h1>
+        <h1 className="text-2xl font-semibold text-emerald-500 dark:text-emerald-300">Job & Internship Search</h1>
         <form onSubmit={search} className="grid md:grid-cols-4 gap-2 bg-white border rounded-xl p-3">
           <input className="border rounded px-3 py-2" value={query.role} onChange={(e) => setQuery({ ...query, role: e.target.value })} placeholder="Role" />
           <input className="border rounded px-3 py-2" value={query.location} onChange={(e) => setQuery({ ...query, location: e.target.value })} placeholder="Location" />
@@ -59,5 +62,6 @@ export default function JobSearchPage() {
         </section>
       </main>
     </>
+    </motion.div>
   );
 }

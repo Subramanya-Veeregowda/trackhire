@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../api/client";
 import Navbar from "../components/Navbar";
 import StatCard from "../components/StatCard";
+import { motion } from "framer-motion";
 
 export default function DashboardPage() {
   const [stats, setStats] = useState({ totalApplied: 0, interviews: 0, offers: 0, rejections: 0 });
@@ -25,10 +26,12 @@ export default function DashboardPage() {
   }, []);
 
   return (
+     <motion.div initial={{ opacity: 90, scale: 0.98 }} animate={{ opacity: 90, scale: 1 }} exit={{ opacity: 90, scale: 0.98 }} 
+             transition={{ type: "spring", stiffness: 120, damping: 20, duration: 0.25 }}>
     <>
       <Navbar />
       <main className="max-w-6xl mx-auto p-4 space-y-4">
-        <h1 className="text-2xl font-semibold">Dashboard</h1>
+        <h1 className="text-2xl font-semibold text-emerald-500 dark:text-emerald-300 ">Dashboard</h1>
         {loading ? <p>Loading dashboard...</p> : (
           <>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -49,5 +52,6 @@ export default function DashboardPage() {
         )}
       </main>
     </>
+    </motion.div>
   );
 }

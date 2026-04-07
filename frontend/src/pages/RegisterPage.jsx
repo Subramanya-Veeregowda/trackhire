@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
+import { motion } from "framer-motion";
 
 export default function RegisterPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -26,6 +27,8 @@ export default function RegisterPage() {
   };
 
   return (
+    <motion.div initial={{ opacity: 90, scale: 0.98 }} animate={{ opacity: 90, scale: 1 }}
+                exit={{ opacity: 90, scale: 0.98 }} transition={{ type: "spring", stiffness: 120, damping: 20, duration: 0.15 }}>
     <div className="min-h-screen grid place-items-center p-4">
       <form onSubmit={submit} className="bg-white border rounded-xl p-6 w-full max-w-md space-y-3">
         <h1 className="text-2xl font-semibold">Create account</h1>
@@ -37,5 +40,6 @@ export default function RegisterPage() {
         <p className="text-sm">Have account? <Link className="text-blue-600" to="/login">Login</Link></p>
       </form>
     </div>
+    </motion.div>
   );
 }
